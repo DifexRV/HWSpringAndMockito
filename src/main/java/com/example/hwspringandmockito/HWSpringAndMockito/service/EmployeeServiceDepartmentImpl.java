@@ -22,18 +22,27 @@ public class EmployeeServiceDepartmentImpl implements DepartmentService {
 
 
     @Override
-    public Employee departmentsMinSalary(Integer department) {
+    public Integer departmentsSumSalary(Integer id) {
+        Integer sumSalary = employeeServiceimpl.employeeList().stream()
+                .filter(dep -> dep != null && dep.getId() == id)
+                .mapToInt(Employee::getSalary)
+                .sum();
+        return sumSalary;
+    }
 
-        return employeeServiceimpl.employeeList().stream().filter(dep -> dep != null && dep.getDepartment() == department)
+    @Override
+    public Employee departmentsMinSalary(Integer id) {
+
+        return employeeServiceimpl.employeeList().stream().filter(dep -> dep != null && dep.getId() == id)
                 .min(Comparator.comparingInt(dep -> dep.getSalary()))
                 .orElseThrow(() -> new RuntimeException("Позиция не найдена"));
 
     }
 
     @Override
-    public Employee departmentsMaxSalary(Integer department) {
+    public Employee departmentsMaxSalary(Integer id) {
 
-        return employeeServiceimpl.employeeList().stream().filter(dep -> dep != null && dep.getDepartment() == department)
+        return employeeServiceimpl.employeeList().stream().filter(dep -> dep != null && dep.getId() == id)
                 .max(Comparator.comparingInt(dep -> dep.getSalary()))
                 .orElseThrow(() -> new RuntimeException("Позиция не найдена"));
 
@@ -41,17 +50,17 @@ public class EmployeeServiceDepartmentImpl implements DepartmentService {
 
 
     @Override
-    public List<Employee> departmentList(Integer department) {
+    public List<Employee> departmentList(Integer id) {
         return employeeServiceimpl.employeeList().stream()
-                .filter(dep -> dep.getDepartment() == department)
+                .filter(dep -> dep.getId() == id)
                 .sorted(Comparator.comparingInt(dep -> dep.getSalary()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<Integer,List<Employee>> departmentsMap() {
+    public Map<Integer, List<Employee>> departmentMap() {
 
         return employeeServiceimpl.employeeList()
-                .stream().collect(Collectors.groupingBy(dep -> dep.getDepartment()));
+                .stream().collect(Collectors.groupingBy(dep -> dep.getId()));
     }
 }

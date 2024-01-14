@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) throws Exception {
-        validateInput(employee.getFirstName(),employee.getLastName());
+        validateInput(employee.getFirstName(), employee.getLastName());
         if (employees.size() >= 13) {
             throw new EmployeeStorageIsFullException();
         }
@@ -54,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee removeEmployee(Employee employee) throws Exception {
 
-        validateInput(employee.getFirstName(),employee.getLastName());
+        validateInput(employee.getFirstName(), employee.getLastName());
 
         if (employees.containsKey(employee.getFullName()) == false) {
             throw new EmployeeNotFoundException();
@@ -67,7 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findEmployee(Employee employee) throws Exception {
 
-        validateInput(employee.getFirstName(),employee.getLastName());
+        validateInput(employee.getFirstName(), employee.getLastName());
 
         if (employees.containsKey(employee.getFullName()) == false) {
             throw new EmployeeNotFoundException();
@@ -75,8 +75,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.get(employee.getFullName());
     }
 
-    private void validateInput(String firstName, String lastName) throws Exception {
-        if (!(isAlpha(firstName) && isAlpha(lastName))){
+    public void validateInput(String firstName, String lastName) throws Exception {
+        if (!(isAlpha(firstName) && isAlpha(lastName))) {
             throw new InvalidInputException();
         }
     }
