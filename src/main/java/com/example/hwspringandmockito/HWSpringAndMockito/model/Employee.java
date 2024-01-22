@@ -1,7 +1,5 @@
 package com.example.hwspringandmockito.HWSpringAndMockito.model;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.*;
@@ -10,7 +8,7 @@ public class Employee {
 
     private final String firstName;
     private final String lastName;
-    private Integer department;
+    private Integer id;
     private Integer salary;
 
 
@@ -18,7 +16,7 @@ public class Employee {
     public Employee(String firstName, String lastName, int department, int salary) {
         this.firstName = capitalize(firstName.toLowerCase());
         this.lastName = capitalize(lastName.toLowerCase());
-        this.department = department;
+        this.id = department;
         this.salary = salary;
     }
 
@@ -34,12 +32,12 @@ public class Employee {
         return firstName + " " + lastName;
     }
 
-    public int getDepartment() {
-        return department;
+    public int getId() {
+        return id;
     }
 
-    public void setDepartment(int department) {
-        this.department = department;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSalary() {
@@ -51,7 +49,7 @@ public class Employee {
     }
 
     public String toString() {
-        return "firstName: " + getFirstName() + ", lastName: " + getLastName() + ". department: " + getDepartment() + ". salary: " + getSalary() + ".";
+        return "firstName: " + getFirstName() + ", lastName: " + getLastName() + ". department: " + getId() + ". salary: " + getSalary() + ".";
     }
 
     public boolean equals(Object other) {
@@ -62,12 +60,12 @@ public class Employee {
         Employee employee = (Employee) other;
         return Objects.equals(getFirstName(), employee.firstName) &&
                 Objects.equals(getLastName(), employee.lastName) &&
-                Objects.equals(getDepartment(), employee.department) &&
+                Objects.equals(getId(), employee.id) &&
                 Objects.equals(getSalary(), employee.salary);
     }
 
     public int hashCode() {
-        return Objects.hash(firstName, lastName, department, salary);
+        return Objects.hash(firstName, lastName, id, salary);
     }
 
 }
